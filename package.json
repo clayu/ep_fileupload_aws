@@ -1,11 +1,15 @@
 {
   "name": "ep_fileupload_aws",
   "description": "File upload (for AWS S3)",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "RedHog",
     "email": "egil.moller@freecode.no",
     "url": "Egil Moeller"
+  },
+  "repository":{
+	"type": "git",
+	"url":"https://github.com/clayu/ep_fileupload_aws"
   },
   "contributors": [
     {
