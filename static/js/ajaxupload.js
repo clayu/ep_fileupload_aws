@@ -21,6 +21,29 @@
 var d = document, w = window;
 
 /**
+* Receive a message from frame
+*/
+function bindEvent(element, eventName, eventHandler) {
+	if (element.addEventListener){
+		element.addEventListener(eventName, eventHandler, false);
+	} else if (element.attachEvent) {
+		element.attachEvent('on' + eventName, eventHandler);
+	}
+}
+
+ // Listen to message from child window
+bindEvent(window, "message", function (e) {
+	console.log("recieved message", e.data);
+	receiveFile(  e.data );
+});
+
+var receiveFile = function (data){
+	//noop... uploader overrides me 
+	console.log("receiveFile no-op");
+}
+
+
+/**
  * Get element by id
  */	
 function get(element){
@@ -432,7 +455,12 @@ AjaxUpload.prototype = {
 			// create new input
 			this._createInput();
 			
-			var toDeleteFlag = false;
+			var toDeleteFlag = false;			
+			
+			receiveFile = function(data){
+				console.log("receiveFile: calling onComplete");
+				settings.onComplete.call( self, file, data );
+			};			
 			
 			addEvent(iframe, 'load', function(e){
 					
@@ -449,8 +477,12 @@ AjaxUpload.prototype = {
 						}, 0);
 					}
 					return;
-				}				
+				}
+
 				
+
+				
+				/*
 				var doc = iframe.contentDocument ? iframe.contentDocument : frames[iframe.id].document;
 
 				// fixing Opera 9.26
@@ -499,7 +531,7 @@ AjaxUpload.prototype = {
 				}
 																			
 				settings.onComplete.call(self, file, response);
-						
+				*/		
 				// Reload blank page, so that reloading main page
 				// does not re-submit the post. Also, remember to
 				// delete the frame

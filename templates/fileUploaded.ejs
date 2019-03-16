@@ -4,6 +4,9 @@
    if (navigator.appVersion.indexOf("MSIE") == -1) {
     document.domain = document.domain;
    }
+	// Send a message to the parent
+	window.parent.postMessage("<%= upload %>", '*');   
+   
   </script>
  </head>
  <body><%= upload %></body>
