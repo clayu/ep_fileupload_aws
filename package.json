@@ -1,7 +1,7 @@
 {
   "name": "ep_fileupload_aws",
   "description": "File upload (for AWS S3)",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
     "name": "RedHog",
     "email": "egil.moller@freecode.no",
